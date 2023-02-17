@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const Skills = () => {
+const Skills = (props) => {
 
     const skills = [
         "ReactJS",
@@ -89,19 +89,32 @@ const Skills = () => {
         "Multi-Tasking",
     ];
 
-
-  const [selectedtags, setSelected] = useState(skills);
-
   return (
     <div>
-          <Autocomplete
+    {/* <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={skills}
       sx={{ width: 300 }}
        renderInput={(params) =>
-       <TextField {...params} label="Select relevant skills" />}
-    />
+       {<TextField {...params} label="Select relevant skills" />}}
+    /> */}
+
+    <Autocomplete
+        multiple
+        id="tags-outlined"
+        options={skills}
+        getOptionLabel={(option) => option}
+        onChange={(event,opt)=>{props.setSelectedSkills(opt)}}
+        filterSelectedOptions
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Select skills"
+            placeholder="Skills"
+          />
+        )}
+      />
     </div>
   )
 }

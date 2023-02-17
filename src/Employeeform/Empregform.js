@@ -8,10 +8,11 @@ import Educationform from './Educationform.js';
 import Skills from './Skills.js';
 import Educationdeatil from './Educationdetail.js';
 import Skillinput from './Skillinput';
+import {useNavigate} from 'react-router-dom';
 
 const Empregform = () => {
 
-    
+  const navigate =useNavigate()
 
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -25,6 +26,9 @@ const Empregform = () => {
     const [userinput, setuserinput] = useState([]);
     
   const [userInput, setUserInput] = useState({
+    fullname:"", 
+    email: "", 
+    laocation:"",
     degree: "",
     startdate: "",
     enddate: "",
@@ -33,6 +37,12 @@ const Empregform = () => {
     category:""
     
   })
+
+  const handleSubmit = async() =>{
+    handleClose1()
+  }
+
+  const [selectedSkills,setSelectedSkills] = useState([])
   
   
   return (
@@ -56,7 +66,7 @@ const Empregform = () => {
         <form>
           <div className="form-group">
             <label for="exampleInputName">Full Name</label>
-                      <input type="text" name="fullname" className="form-control" id="userInputName" placeholder="Enter your name and surname"  />
+             <input type="text" name="fullname" className="form-control" id="userInputName" placeholder="Enter your name and surname"  />
               {/* <TextField id="standard-basic" label="Full Name" variant="standard" /> */}
                       
           </div>
@@ -76,7 +86,7 @@ const Empregform = () => {
         <hr />
         <div className="card shadow-sm p-4 m-2 my-3">
             <h4>Education</h4>
-            <Educationdeatil/>
+            <Educationdeatil userInput={userInput} />
             <button  className="btn btn-primary mx-2" type="button" onClick={handleShow} >Add education details</button>
         </div>
         <Modal show={show} onHide={handleClose}>
@@ -99,7 +109,8 @@ const Empregform = () => {
         <div className="card shadow-sm p-4 m-2 my-3">
             <h4>Skills</h4>
             <div className="container p-2">
-            <Skillinput/>
+              {/*  --------------- skillinput --------------- */}
+            <Skillinput selectedSkills={selectedSkills}  />
             </div>
             <button className="btn btn-primary mx-2" type="button" onClick={handleShow1} >Add Skills</button>
         </div>
@@ -108,19 +119,20 @@ const Empregform = () => {
           <Modal.Title>Add skills</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Skills/>
+          {/* --------------------- skills page ------------ */}
+          <Skills selectedSkills= {selectedSkills} setSelectedSkills={setSelectedSkills} /> 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose1}>
             Discard
           </Button>
-          <Button variant="primary" onClick={handleClose1}>
+          <Button variant="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
                   
-          <button type="submit" className="btn btn-primary">Confirm</button>
+          <button type="submit" onClick={()=>{navigate("/preview")}} className="btn btn-primary">Confirm</button>
         </form>
       </div> 
       

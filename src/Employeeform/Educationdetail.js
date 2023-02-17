@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
 export default function Educationdetail(props) {
+  console.log(props.userInput)
   return (
     <>
     <div className="container-fluid mx-auto">
@@ -25,16 +26,16 @@ export default function Educationdetail(props) {
       <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
         <Grid item xs={12} sm={12} md={6}  sx={{bgcolor:'white', ml:2,p:3}} >
                   <Typography gutterBottom variant="h6" component="h2">
-                    Name
+                    {props.userInput.name || "Name"}
                 </Typography>
                 <Typography sx={{ mb: 0.5 }} color="text.secondary">
-                  Category
+                {props.userInput.category || "Category"}
                 </Typography>
                   <Typography sx={{ mb: 0.5 }} color="text.secondary">
-                  Degree
+                  {props.userInput.degree || "Degree"}
                 </Typography>
                 <Typography sx={{ mb: 0.5 }} color="text.secondary">
-                  Start  date -  end date
+                {props.userInput.startdate || "00:00:0000"} -  {props.userInput.enddate || "00:00:0000"}
                 </Typography>
       <hr/>
               </Grid>

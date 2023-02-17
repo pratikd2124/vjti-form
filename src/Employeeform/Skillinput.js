@@ -2,7 +2,8 @@ import React from 'react'
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-const Skillinput = () => {
+const Skillinput = (props) => {
+  console.log(props.selectedSkills)
     return (
     <div>
             {/* {props.map((Val) => {
@@ -11,7 +12,12 @@ const Skillinput = () => {
             );
           })} */}
     <Stack direction="row" spacing={1}>
-      <Chip label="Chip Outlined" variant="outlined" />
+      {props.selectedSkills ? props.selectedSkills.map((data)=>
+      (
+        <Chip key={data} label={data} variant="outlined" />
+      ))
+      :""
+      }
     </Stack>
     </div>
   )
