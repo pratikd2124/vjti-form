@@ -19,8 +19,18 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import FindInPageIcon from '@mui/icons-material/FindInPage';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import Accountmenu from './Accountmenu.js';
+
 import Profile from './Profile.js';
 import Notification from './Notification.js';
+import Jobsearch from './Jobsearch.js';
+import Resumeanalysis from './Resumeanalysis.js';
 
 const drawerWidth = 240;
 
@@ -84,18 +94,27 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+    
+  };
+
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
+  <div > 
+      <Box sx={{ display: 'flex',}}>
     <CssBaseline />
     <AppBar
-      position="fixed"
-      sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        position="fixed"
+      sx={{ bgcolor:"#6670de", width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
     >
-      <Toolbar>
-        <Typography variant="h6" noWrap component="div">
+      <Toolbar sx={{display:'flex', justifyContent:"space-between"}}>
+          <Typography variant="h6" noWrap component="div">
           Dashboard
-        </Typography>
+          </Typography>
+              <Accountmenu sx={{ml:'auto'}} />    
       </Toolbar>
     </AppBar>
     <Drawer
@@ -105,6 +124,8 @@ export default function Dashboard() {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
+          bgcolor:"#01063d",
+          color:"grey",
         },
       }}
       variant="permanent"
@@ -112,8 +133,8 @@ export default function Dashboard() {
     >
       <Toolbar />
       <Divider />
-      <List>
-        {['Job Recommendation', 'Profile', 'Send email', 'Courses', 'Tests'].map((text, index) => (
+      {/* <List>
+        {['Job Recommendation', 'Profile', 'Skill assessment', 'Resume analysis', 'Job search and application'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -124,17 +145,56 @@ export default function Dashboard() {
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider /> */}
       <List>
-        {/* {['All Notifications', 'Drafts', ].map((text, index) => (
-          
-        ))} */}
-        <ListItem  disablePadding onClick={()=>Setmenudata("All Notifications")}>
-            <ListItemButton>
-              <ListItemIcon>
-              <InboxIcon />
+        <ListItem  disablePadding onClick={()=>Setmenudata("Job Recommendation")} >
+          <ListItemButton
+                selected={selectedIndex === 0}
+                onClick={(event) => handleListItemClick(event, 0)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <WorkHistoryIcon />
               </ListItemIcon>
-              <ListItemText primary="All Notifications" />
+              <ListItemText primary="Job Recommendation" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+
+        <List>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Resume analysis")}>
+                <ListItemButton
+                  selected={selectedIndex === 1}
+                  onClick={(event) => handleListItemClick(event, 1)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <AssessmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Resume analysis" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Skill assessment")}>
+                <ListItemButton
+                  selected={selectedIndex === 2}
+                  onClick={(event) => handleListItemClick(event, 2)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <AssignmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Skill assessment" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+      <List>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Job search and application")}>
+                <ListItemButton
+                selected={selectedIndex === 3}
+                onClick={(event) => handleListItemClick(event, 3)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <FindInPageIcon />
+              </ListItemIcon>
+              <ListItemText primary="Job search and application" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -144,11 +204,26 @@ export default function Dashboard() {
           
         ))} */}
         <ListItem  disablePadding onClick={()=>Setmenudata("Profile")}>
-            <ListItemButton>
-              <ListItemIcon>
-              <InboxIcon />
+                <ListItemButton
+                selected={selectedIndex === 4}
+                onClick={(event) => handleListItemClick(event, 4)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText primary="Profile" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+        <ListItem  disablePadding onClick={()=>Setmenudata("All Notifications")}>
+                <ListItemButton
+                selected={selectedIndex === 5}
+                onClick={(event) => handleListItemClick(event, 5)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <NotificationsIcon />
+              </ListItemIcon>
+              <ListItemText primary="All Notifications" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -156,12 +231,18 @@ export default function Dashboard() {
     </Drawer>
     <Box
       component="main"
-      sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+      sx={{ flexGrow: 1, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
     >
       <Toolbar />
         {menudata == "Profile" && <Profile />}
-        {menudata == "All Notifications" && <Notification/>}
+        {menudata == "All Notifications" && <Notification />}
+        {menudata == "Job search and application" && <Jobsearch/>}
+        {menudata == "Resume analysis" && <Resumeanalysis/>}
+        
     </Box>
   </Box>
+    </div>
+    </>
+    
   );
 }
