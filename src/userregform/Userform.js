@@ -1,37 +1,100 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Userform = () => {
-  return (
-      <div className="container card mx-auto border-1 shadow" style={{ "width": "70%" }}>
-          <div className="text-center py-2">
-              <h3>Sign Up User</h3>
-          </div>
-          <form>
-            <div class="form-group col-md-5 mx-auto py-1 ">
-                <label for="name" class="h5">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="" placeholder="Enter First name & last name"/>
-            </div>
-            <div class="form-group col-md-5 mx-auto  py-1 ">
-                <label for="exampleInputEmail1" class="h5">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                
-            </div>
-            <div class="form-group col-md-5 mx-auto  py-1 ">
-                <label for="Password1" class="h5">Password</label>
-                <input type="password" class="form-control" id="pass" placeholder="Password"/>
-              </div>
-              <div class="form-group col-md-5 mx-auto  py-1">
-                <label for="Password2" class="h5">Confirm Password</label>
-                <input type="password" class="form-control" id="cnfpass" placeholder="Confirm Password"/>
-            </div>
-            
-              <div class="text-center p-4">
-                <button type="submit" class="btn btn-primary w-50">Submit</button>
-              </div>
+  const [userInput, setUserInput] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+    cnfpassword: ""
+  })
 
-              <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
-            </form>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInput((prev) => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { name, email, password, cnfpassword } = userInput;
+
+    if (name && email && password && cnfpassword) {
+
+      if (password === cnfpassword) {
+
+        fetch("http://localhost:5000/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username:name,
+            email,
+            password,
+            role: "employee"
+          })
+        }).then(res => res.json().then((data) => {
+          console.log(data)
+          if (data.success) {
+            localStorage.setItem("user-vjti", JSON.stringify(data.data))
+            // store current date in local storage
+            localStorage.setItem('date', new Date());
+            navigate("/otp")
+          } else {
+            alert(data.error)
+          }
+        }))
+
+
+      } else {
+        alert("Password not matched")
+      }
+
+    } else {
+      alert("Please fill all the fields")
+    }
+
+  }
+
+  const navigate = useNavigate()
+  return (
+    <div className="container card mx-auto border-1 shadow" style={{ "width": "70%" }}>
+      <div className="text-center py-2">
+        <h3>Sign Up User</h3>
+      </div>
+      <form>
+        <div className="form-group col-md-5 mx-auto py-1 ">
+          <label for="name" className="h5">Name</label>
+          <input type="text" onChange={handleChange} className="form-control" id="name" aria-describedby="" name="name" placeholder="Enter First name & last name" />
+        </div>
+        <div className="form-group col-md-5 mx-auto  py-1 ">
+          <label for="exampleInputEmail1" className="h5">Email address</label>
+          <input type="email" onChange={handleChange} className="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" />
+
+        </div>
+        <div className="form-group col-md-5 mx-auto  py-1 ">
+          <label for="Password1" className="h5">Password</label>
+          <input type="password" onChange={handleChange} className="form-control" id="pass" name="password" placeholder="Password" />
+        </div>
+        <div className="form-group col-md-5 mx-auto  py-1">
+          <label for="Password2" className="h5">Confirm Password</label>
+          <input type="password" onChange={handleChange} className="form-control" id="cnfpass" name="cnfpassword" placeholder="Confirm Password" />
+        </div>
+
+        <div className="text-center p-4">
+          <button type="submit" className="btn btn-primary w-50" onClick={(e) => { handleSubmit(e) }}>Submit</button>
+        </div>
+
+        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+          className="fw-bold text-body"><u>Login here</u></a></p>
+      </form>
     </div>
   )
 }
