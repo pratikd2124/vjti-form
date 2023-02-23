@@ -27,10 +27,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import Accountmenu from './Accountmenu.js';
 
-import Profile from './Profile.js';
-import Notification from './Notification.js';
-import Jobsearch from './Jobsearch.js';
-import Resumegenerate from './Resumegenerate.js';
+
 
 
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
@@ -84,7 +81,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 
-export default function Dashboard() {
+export default function Dashboardorgan() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -164,14 +161,14 @@ export default function Dashboard() {
         <Divider />
 
         <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Resume Generator")}>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Resume analysis")}>
                 <ListItemButton
                   selected={selectedIndex === 1}
                   onClick={(event) => handleListItemClick(event, 1)}>
               <ListItemIcon sx={{color:'white'}}>
               <AssessmentIcon />
               </ListItemIcon>
-              <ListItemText primary="Resume Generator" />
+              <ListItemText primary="Resume analysis" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -240,7 +237,7 @@ export default function Dashboard() {
         {menudata == "Profile" && <Profile />}
         {menudata == "All Notifications" && <Notification />}
         {menudata == "Job search and application" && <Jobsearch/>}
-        {menudata == "Resume Generator" && <Resumegenerate/>}
+        {menudata == "Resume analysis" && <Resumeanalysis/>}
         
     </Box>
   </Box>
