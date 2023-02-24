@@ -1,8 +1,9 @@
 import React, { useState} from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-export const Hire = () => {
+const Hire = () => {
   return (
       <>
       <Form>
@@ -20,13 +21,10 @@ export const Hire = () => {
         <Form.Label>Estimated Stipend offered</Form.Label>
         <Form.Control type="text" placeholder="Salary Offered" />
       </Form.Group>
-      <Form.Group controlId="formFileMultiple" className="mb-3">
-        <Form.Label>Add Files related</Form.Label>
-        <Form.Control type="file" multiple />
-      </Form.Group>
+      
         <Form.Group className="mb-3" controlId="jobdec">
         <Form.Label>Skills Required</Form.Label>
-        <Form.Control type="text" placeholder="Salary Offered" />
+        <Form.Control type="text" placeholder="Skills Required" />
       </Form.Group>        
       <Button variant="primary" type="submit">
         Submit
@@ -35,3 +33,4 @@ export const Hire = () => {
     </>
   )
 }
+export default Hire;
