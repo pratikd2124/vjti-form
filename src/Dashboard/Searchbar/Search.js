@@ -58,7 +58,7 @@ function Search() {
 
   return (
     <div className="main">
-      <h1></h1>
+      
       <div className="search container bg-light w-100 shadow p-2 mb-3" sx={{borderRadius:'20px'}}>
         <TextField
           id="outlined-basic"
@@ -67,7 +67,7 @@ function Search() {
           width="300"
           label="Search"
          />
-            <Searchbar>
+            {/* <Searchbar>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -75,7 +75,7 @@ function Search() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Searchbar>
+          </Searchbar> */}
       </div>
       
       {/* <Listsearch input={inputText} /> */}

@@ -104,6 +104,7 @@ const Skills = (props) => {
         multiple
         id="tags-outlined"
         options={skills}
+        defaultValue={props.selectedSkills}
         getOptionLabel={(option) => option}
         onChange={(event,opt)=>{props.setSelectedSkills(opt)}}
         filterSelectedOptions

@@ -4,7 +4,7 @@ import AddJobs from './AddJobs';
 const Jobsview = () => {
   return (
       <>
-          <AddJobs />
+          
           <Jobcard/>
       </>
   )

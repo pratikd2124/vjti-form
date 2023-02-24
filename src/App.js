@@ -16,11 +16,7 @@ import AddTest from './Test/CreateTest/AddTest.js';
 import ShowTest from './Test/StudentApplyTest/ShowTest.js';
 import DoTest from './Test/StudentApplyTest/DoTest.js';
 import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
-import ViewTest from './Test/CreateTest/ViewTest.js';
-import AddTest from './Test/CreateTest/AddTest.js';
-import ShowTest from './Test/StudentApplyTest/ShowTest.js';
-import DoTest from './Test/StudentApplyTest/DoTest.js';
-import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
+import Login from './userregform/Login.js';
 
 function App() {
   return (
@@ -41,6 +37,8 @@ function App() {
           <Route exact path="/showtest" element={<ShowTest />} />
           <Route exact path="/dotest" element={<DoTest />} />
           <Route exact path="/applytest" element={<ApplyTest />} />
+          <Route exact path="/login" element={<Login />} />
+
 
 
 

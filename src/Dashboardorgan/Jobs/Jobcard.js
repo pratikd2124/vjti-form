@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -6,11 +6,13 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
+// import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+import Skillinput from '../../Employeeform/Skillinput';
 import Button from '@mui/material/Button';
+import EditJob from './EditJob';
+import AddJobs from './AddJobs';
 
 const Jobcard = () => {
   const jsonData = [
@@ -21,7 +23,7 @@ const Jobcard = () => {
       jobrole: "MERN Developer",
       location: "Pune",
       jobtype: "Part Time",
-      salary:"$20000"
+      salary: "$20000"
     },
     {
       companyname: "JVC PVT LTD",
@@ -30,7 +32,7 @@ const Jobcard = () => {
       jobrole: "MERN Developer",
       location: "Pune",
       jobtype: "Part Time",
-      salary:"$20000"
+      salary: "$20000"
     },
     {
       companyname: "JVC PVT LTD",
@@ -39,57 +41,101 @@ const Jobcard = () => {
       jobrole: "MERN Developer",
       location: "Pune",
       jobtype: "Part Time",
-      salary:"$20000"
+      salary: "$20000"
     }
   ]
 
-    
+  const url = "http://localhost:5000/user/jobs"
+
+  const [data, setdata] = useState([])
+
+  useEffect(() => {
+    fetch(url + "/getJobs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      res.json().then(data => {
+        console.log(data)
+        if (data.error) return alert(data.error)
+        setdata(data.data)
+      })
+    })
+  }, [])
+
+  const handleGet = () => {
+    fetch(url + "/getJobs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      res.json().then(data => {
+        console.log(data)
+        if (data.error) return alert(data.error)
+        setdata(data.data)
+      })
+    })
+  }
+  
+
+  const [show1, setShow1] = useState(false);
+
+  const handleShow1 = () => setShow1(true)
+
   return (
     <>
-    <Container maxWidth="lg" >
-    <Grid container spacing={3} alignItems="center" justifyContent="center">
-            <Grid item xs={12} sm={12} md={6}>
-                      {jsonData && jsonData.map((jsondata) => (
-                          <Card className="shadow " sx={{ mb: 3, minWidth: 400, maxWidth: 500, maxheight: 300, p: 2, borderRadius: '20px', }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
-                        <Avatar
-                                size="sm"
-                                src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg"
-                                sx={{ p: 0.5, border: '2px solid', borderColor: 'background.body' }}
-                              />
-                              <Typography component="div" variant="h6">
-                                  {jsondata.companyname || ""} <br />
-                                  {jsondata.time && jsondata.date && <Typography variant="body2"  >
-                                  Time : {jsondata.time} Date : {jsondata.date} 
-                                  </Typography>}
-                            </Typography>
-                      </Box>
-                      
-                          <CardContent>
-                          <Typography component="div" variant="h5" sx={{fontWeight:"bold"}}>
-                                {jsondata.jobrole}
-                              </Typography>
-                              <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
-                                <Typography sx={{ m: 1 }}  color="text.secondary" gutterBottom>
-                                    <LocationOnIcon/>  {jsondata.location}
-                                </Typography>
-                                <Typography sx={{ m: 1,}}  color="text.secondary" >
-                                    {jsondata.jobtype}
-                                </Typography>
-                              </Box>
-                            
-                            <Typography sx={{ m: 1,}}  color="text.secondary" variant="h5">
-                                
-                  {jsondata.salary}
-                            </Typography>
-                            
-                        </CardContent>
-                        <CardActions>
-                            <Button variant="contained" size="small" sx={{ ml: 'auto',px:4 , }}>Apply</Button>
-                        </CardActions>
-                        </Card>))}
-                        {/*  */}
-                        {/* <Card className="shadow " sx={{ mb:1, minWidth: 400,maxWidth:500, maxheight:300, p: 2, borderRadius: '20px', }}>
+      <AddJobs handleGet={handleGet} />
+      <Container maxWidth="lg" >
+        <Grid container spacing={3} alignItems="center" justifyContent="center">
+          <Grid item xs={12} sm={12} md={6}>
+            {data && data.map((jsondata) => (
+              <Card className="shadow " sx={{ mb: 3, maxWidth: "50vw", minWidth: "40vw", maxheight: 300, p: 2, borderRadius: '20px', }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
+                  <Avatar
+                    size="sm"
+                    src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg"
+                    sx={{ p: 0.5, border: '2px solid', borderColor: 'background.body' }}
+                  />
+                  <Typography component="div" variant="h6">
+                    {jsondata.jobtitle || ""} <br />
+                    
+                  </Typography>
+                </Box>
+
+                <CardContent>
+                <Typography component="div" variant="p" >
+                    {jsondata.jobdesc || ""}
+                  </Typography>
+                  <Typography component="div" variant="h5" sx={{ fontWeight: "bold" }}>
+                    <Skillinput selectedSkills={jsondata.skills} />
+                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
+                    <Typography sx={{ m: 1 }} color="text.secondary" gutterBottom>
+                     Location : {jsondata.location}
+                    </Typography>
+                    <Typography sx={{ m: 1, }} color="text.secondary" >
+                      {jsondata.jobtype}
+                    </Typography>
+                  </Box>
+
+                  <Typography sx={{ m: 1, }} color="text.secondary">
+
+                    Salary : {jsondata.salary || ""}
+                  </Typography>
+
+                </CardContent>
+                <CardActions>
+                  <Button variant="contained" size="small" sx={{ ml: 'auto', px: 4, }} onClick={handleShow1} >Edit</Button>
+                  <Button variant="contained" color="error" size="small" sx={{ ml: 'auto', px: 4, }}>Delete</Button>
+                  <EditJob show1 = {show1} setShow1 = {setShow1} handleShow1={handleShow1} data={jsondata} handleGet={handleGet} />
+
+                </CardActions>
+              </Card>))}
+
+            {/*  */}
+            {/* <Card className="shadow " sx={{ mb:1, minWidth: 400,maxWidth:500, maxheight:300, p: 2, borderRadius: '20px', }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
                         <Avatar
                                 size="sm"
@@ -127,12 +173,12 @@ const Jobcard = () => {
                             <Button variant="contained" size="small" sx={{ ml: 'auto',px:4 , }}>Apply</Button>
                         </CardActions>
                         </Card> */}
-                      
-              </Grid>
+
           </Grid>
-    </Container>
-       
-      </>
+        </Grid>
+      </Container >
+
+    </>
   )
 }
 

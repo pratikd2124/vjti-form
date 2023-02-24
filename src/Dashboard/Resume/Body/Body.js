@@ -19,7 +19,7 @@ function Body() {
     other: "Other",
   };
   const resumeRef = useRef();
-
+  const [color,setcolor] = useState("")
   const [activeColor, setActiveColor] = useState(colors[0]);
   const [resumeInformation, setResumeInformation] = useState({
     [sections.basicInfo]: {
@@ -64,7 +64,7 @@ function Body() {
       <p className={styles.heading}>Resume Builder using ReactJS</p>
       <div className={styles.toolbar}>
         <div className={styles.colors}>
-          {colors.map((item) => (
+          {/* {colors.map((item) => (
             <span
               key={item}
               style={{ backgroundColor: item }}
@@ -72,7 +72,9 @@ function Body() {
                 }`}
               onClick={() => setActiveColor(item)}
             />
-          ))}
+          ))} */}
+          <label for="exampleColorInput" class="form-label">Color picker</label>
+          <input type="color" class="form-control form-control-color" id="exampleColorInput" onChange={(e)=>{setcolor(e.target.value); console.log(e.target.value)}} value={color} defaultValue={"#020DF9"} title="Choose your color"></input>
         </div>
         <ReactToPrint
           trigger={() => {
@@ -95,7 +97,7 @@ function Body() {
           ref={resumeRef}
           sections={sections}
           information={resumeInformation}
-          activeColor={activeColor}
+          activeColor={color}
         />
       </div>
     </div>
