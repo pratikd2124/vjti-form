@@ -25,6 +25,7 @@ const Empregform = () => {
 
   const [userInput, setUserInput] = useState({
     
+
     laocation: "",
     degree: "",
     startDate: "",

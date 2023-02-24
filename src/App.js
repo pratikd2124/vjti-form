@@ -16,6 +16,11 @@ import AddTest from './Test/CreateTest/AddTest.js';
 import ShowTest from './Test/StudentApplyTest/ShowTest.js';
 import DoTest from './Test/StudentApplyTest/DoTest.js';
 import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
+import ViewTest from './Test/CreateTest/ViewTest.js';
+import AddTest from './Test/CreateTest/AddTest.js';
+import ShowTest from './Test/StudentApplyTest/ShowTest.js';
+import DoTest from './Test/StudentApplyTest/DoTest.js';
+import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
 
 function App() {
   return (
