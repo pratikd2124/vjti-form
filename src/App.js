@@ -5,6 +5,8 @@ import Otpreg from './userregform/Otpreg.js';
 import Empregform from './Employeeform/Empregform.js';
 import Preview from './Employeeform/Preview.js';
 import Dashboard from './Dashboard/Dashboard.js';
+import Dashboardorgan from './Dashboardorgan/Dashboardorgan.js';
+
 import {
   BrowserRouter as Router,
   Route,Routes,
@@ -22,6 +24,7 @@ function App() {
           <Route exact path="/signup" element={<Userform />} />
           <Route exact path="/otp" element={<Otpreg />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/organization" element={<Dashboardorgan />} />
 
           {/* <Route exact path="/posts" element={<JobPosts />} />
           <Route exact path="/inventory" element={<Inventory />} />

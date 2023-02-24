@@ -25,8 +25,9 @@ import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import FindInPageIcon from '@mui/icons-material/FindInPage';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import Accountmenu from './Accountmenu.js';
 
+import Jobsview from './Jobs/Jobsview';
+import Profile from './Companyprofile/Profile';
 
 
 
@@ -114,7 +115,7 @@ export default function Dashboardorgan() {
           <Typography variant="h6" noWrap component="div">
           Dashboard
           </Typography>
-              <Accountmenu sx={{ml:'auto'}} />    
+              {/* <Accountmenu sx={{ml:'auto'}} />     */}
       </Toolbar>
     </AppBar>
     <Drawer
@@ -147,97 +148,69 @@ export default function Dashboardorgan() {
       </List>
       <Divider /> */}
       <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Job Recommendation")} >
+        <ListItem  disablePadding onClick={()=>Setmenudata("Post A Job")} >
           <ListItemButton
                 selected={selectedIndex === 0}
                 onClick={(event) => handleListItemClick(event, 0)}>
               <ListItemIcon sx={{color:'white'}}>
               <WorkHistoryIcon />
               </ListItemIcon>
-              <ListItemText primary="Job Recommendation" />
+              <ListItemText primary="Post A Job" />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
 
         <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Resume analysis")}>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Freelancer")}>
                 <ListItemButton
                   selected={selectedIndex === 1}
                   onClick={(event) => handleListItemClick(event, 1)}>
               <ListItemIcon sx={{color:'white'}}>
               <AssessmentIcon />
               </ListItemIcon>
-              <ListItemText primary="Resume analysis" />
+              <ListItemText primary="Freelancer" />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
         <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Skill assessment")}>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Company Details")}>
                 <ListItemButton
                   selected={selectedIndex === 2}
                   onClick={(event) => handleListItemClick(event, 2)}>
               <ListItemIcon sx={{color:'white'}}>
               <AssignmentIcon />
               </ListItemIcon>
-              <ListItemText primary="Skill assessment" />
+              <ListItemText primary="Company Details" />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
       <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Job search and application")}>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Track application")}>
                 <ListItemButton
                 selected={selectedIndex === 3}
                 onClick={(event) => handleListItemClick(event, 3)}>
               <ListItemIcon sx={{color:'white'}}>
               <FindInPageIcon />
               </ListItemIcon>
-              <ListItemText primary="Job search and application" />
+              <ListItemText primary="Track application" />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
-        <List>
-        {/* {['All Notifications', 'Drafts', ].map((text, index) => (
-          
-        ))} */}
-        <ListItem  disablePadding onClick={()=>Setmenudata("Profile")}>
-                <ListItemButton
-                selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("All Notifications")}>
-                <ListItemButton
-                selected={selectedIndex === 5}
-                onClick={(event) => handleListItemClick(event, 5)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText primary="All Notifications" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+        
     </Drawer>
     <Box
       component="main"
       sx={{ flexGrow: 1, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
     >
       <Toolbar />
-        {menudata == "Profile" && <Profile />}
-        {menudata == "All Notifications" && <Notification />}
-        {menudata == "Job search and application" && <Jobsearch/>}
-        {menudata == "Resume analysis" && <Resumeanalysis/>}
+         {menudata == "Post A Job" && <Jobsview />}
+        {menudata == "Company Details" && <Profile />}
+      {/*  {menudata == "Job search and application" && <Jobsearch/>}
+        {menudata == "Resume analysis" && <Resumeanalysis/>} */}
         
     </Box>
   </Box>
