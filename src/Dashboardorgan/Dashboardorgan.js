@@ -28,7 +28,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 
 import Jobsview from './Jobs/Jobsview';
 import Profile from './Companyprofile/Profile';
-
+import Trackview from './Tracking/Trackview';
 
 
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
@@ -209,8 +209,8 @@ export default function Dashboardorgan() {
       <Toolbar />
          {menudata == "Post A Job" && <Jobsview />}
         {menudata == "Company Details" && <Profile />}
-      {/*  {menudata == "Job search and application" && <Jobsearch/>}
-        {menudata == "Resume analysis" && <Resumeanalysis/>} */}
+        {menudata == "Track application" && <Trackview/>}
+       {/* {menudata == "Resume analysis" && <Resumeanalysis/>} */}
         
     </Box>
   </Box>

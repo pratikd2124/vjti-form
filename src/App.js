@@ -16,20 +16,17 @@ import AddTest from './Test/CreateTest/AddTest.js';
 import ShowTest from './Test/StudentApplyTest/ShowTest.js';
 import DoTest from './Test/StudentApplyTest/DoTest.js';
 import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
-import ViewTest from './Test/CreateTest/ViewTest.js';
-import AddTest from './Test/CreateTest/AddTest.js';
-import ShowTest from './Test/StudentApplyTest/ShowTest.js';
-import DoTest from './Test/StudentApplyTest/DoTest.js';
-import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
+import Home from './Components/Landingpage/Home';
 
 function App() {
   return (
     
-      <div className="App">
+      <div className="App mt-0">
       <Router>
         
         <Routes>
-          <Route exact path="/" element={<Userform />} />
+          <Route exact path="/" element={<Home />} />       
+          <Route exact path="/signup" element={<Userform />} />
           <Route exact path="/preview" element={<Preview/>} />
           <Route exact path="/empform" element={<Empregform />} />
           <Route exact path="/otp" element={<Otpreg />} />

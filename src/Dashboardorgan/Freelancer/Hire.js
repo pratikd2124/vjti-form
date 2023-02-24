@@ -19,10 +19,7 @@ export const Hire = () => {
         <Form.Label>Estimated Stipend offered</Form.Label>
         <Form.Control type="text" placeholder="Salary Offered" />
       </Form.Group>
-      <Form.Group controlId="formFileMultiple" className="mb-3">
-        <Form.Label>Add Files related</Form.Label>
-        <Form.Control type="file" multiple />
-      </Form.Group>
+      
         <Form.Group className="mb-3" controlId="jobdec">
         <Form.Label>Skills Required</Form.Label>
         <Form.Control type="text" placeholder="Salary Offered" />
