@@ -140,7 +140,12 @@ const Otpreg = () => {
         localStorage.removeItem("user-vjti")
         localStorage.setItem('user-vjti', JSON.stringify(data.data))
         alert("Email verified")
-        navigate("/")
+        const role = JSON.parse(localStorage.getItem("user-vjti")).role
+        if (role === "employee") {
+          navigate("/")
+        }else{
+          navigate("/dashboard")
+        }
       } else {
         alert(data.error)
       }
