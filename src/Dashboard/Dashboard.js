@@ -32,7 +32,7 @@ import Notification from './Notification.js';
 import Jobsearch from './Jobsearch.js';
 import Resumegenerate from './Resumegenerate.js';
 
-
+import { Link } from "react-router-dom";
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -149,7 +149,8 @@ export default function Dashboard() {
         ))}
       </List>
       <Divider /> */}
-      <List>
+          <List>
+            
         <ListItem  disablePadding onClick={()=>Setmenudata("Job Recommendation")} >
           <ListItemButton
                 selected={selectedIndex === 0}
@@ -206,6 +207,7 @@ export default function Dashboard() {
         {/* {['All Notifications', 'Drafts', ].map((text, index) => (
           
         ))} */}
+              
         <ListItem  disablePadding onClick={()=>Setmenudata("Profile")}>
                 <ListItemButton
                 selected={selectedIndex === 4}

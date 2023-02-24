@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const Educationform = (props) => {
@@ -23,7 +22,7 @@ const Educationform = (props) => {
               
     <Form.Group className="mb-3" controlId="startdt">
         <Form.Label>Start Date</Form.Label>
-        <Form.Control type="date" onChange={(e)=>{props.setuserInput({...props.userInput,startdate:e.target.value})}} defaultValue={props.userInput.startdate} placeholder="Enter end date" />
+        <Form.Control type="date" onChange={(e)=>{props.setuserInput({...props.userInput,startDate:e.target.value})}} defaultValue={props.userInput.startDate} placeholder="Enter end date" />
             {/* <Form.Select>
                       <option>Month</option>     
                       <option>January</option> 
@@ -43,7 +42,7 @@ const Educationform = (props) => {
           
         <Form.Group className="mb-3" controlId="enddt">
         <Form.Label>End Date</Form.Label>
-            <Form.Control type="date" onChange={(e)=>{props.setuserInput({...props.userInput,enddate:e.target.value})}} defaultValue={props.userInput.enddate} placeholder="Enter end date" />
+            <Form.Control type="date" onChange={(e)=>{props.setuserInput({...props.userInput,endDate:e.target.value})}} defaultValue={props.userInput.endDate} placeholder="Enter end date" />
         </Form.Group>
              
     <Form.Group className="mb-3" controlId="grade">

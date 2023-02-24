@@ -4,21 +4,21 @@ import Stack from '@mui/material/Stack';
 
 const Skillinput = (props) => {
   console.log(props.selectedSkills)
-    return (
+  return (
     <div>
-            {/* {props.map((Val) => {
+      {/* {props.map((Val) => {
             return (
               
             );
           })} */}
-    <Stack direction="row" spacing={1}>
-      {props.selectedSkills ? props.selectedSkills.map((data)=>
-      (
-        <Chip key={data} label={data} variant="outlined" />
-      ))
-      :""
-      }
-    </Stack>
+      <Stack direction="row" spacing={1}>
+        {props.selectedSkills ? props.selectedSkills.map((data) =>
+        (
+          <Chip key={data} label={data} variant="outlined" />
+        ))
+          : ""
+        }
+      </Stack>
     </div>
   )
 }
