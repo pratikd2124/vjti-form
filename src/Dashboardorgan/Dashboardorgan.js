@@ -29,9 +29,11 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import Jobsview from './Jobs/Jobsview';
 import Profile from './Companyprofile/Profile';
 import Trackview from './Tracking/Trackview';
-
+// import Carrerview from './Carrerpath/Carrerview';
 
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+// import Careerview from './Careerpath/Careerview';
+import Freelanceview from './Freelancer/Freelanceview';
 
 const drawerWidth = 240;
 
@@ -174,24 +176,13 @@ export default function Dashboardorgan() {
           </ListItem>
         </List>
         <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Company Details")}>
-                <ListItemButton
-                  selected={selectedIndex === 2}
-                  onClick={(event) => handleListItemClick(event, 2)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Company Details" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+        
+        
       <List>
         <ListItem  disablePadding onClick={()=>Setmenudata("Track application")}>
                 <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}>
+                selected={selectedIndex === 2}
+                onClick={(event) => handleListItemClick(event, 2)}>
               <ListItemIcon sx={{color:'white'}}>
               <FindInPageIcon />
               </ListItemIcon>
@@ -210,7 +201,8 @@ export default function Dashboardorgan() {
          {menudata == "Post A Job" && <Jobsview />}
         {menudata == "Company Details" && <Profile />}
         {menudata == "Track application" && <Trackview/>}
-       {/* {menudata == "Resume analysis" && <Resumeanalysis/>} */}
+       
+       {menudata == "Freelancer" && <Freelanceview/>}
         
     </Box>
   </Box>

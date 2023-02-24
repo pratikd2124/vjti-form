@@ -434,11 +434,13 @@ function AddTest(props) {
 
   return (
     <Container>
-      <h3 className='mt-2' style={{ textAlign: "center", cursor: "pointer" }} onClick={role === "employee" && titlehandleShow}><u>{titlePaper}</u></h3>
+      <h3 className='mt-2' style={{ textAlign: "center", cursor: "pointer" }} onClick={role === "employee" && titlehandleShow}>{titlePaper} Test</h3>
+
+      <hr/>
       {role === "employee" &&
         <>
-
-          <Button style={{ float: "right", marginRight: "20%" }} className="mt-2 me-2" onClick={() => { handleShow(); setansopt(""); setopt1(""); setopt2(""); setopt3(""); setopt4(""); setquestion(""); }}>Add Questions</Button>
+        <div className='container p-2'>
+        <Button style={{ float: "right", marginRight: "20%" }} className="mt-2 me-2" onClick={() => { handleShow(); setansopt(""); setopt1(""); setopt2(""); setopt3(""); setopt4(""); setquestion(""); }}>Add Questions</Button>
           <br />
 
           <Row>
@@ -476,6 +478,8 @@ function AddTest(props) {
               {!loading ? <Form.Check type="switch" defaultChecked={isActiveState} label="Live Mode" onChange={(e) => { handleSwitch(e.target.checked); setisActiveState(e.target.checked) }} /> : ""}
             </Col>
           </Row>
+        </div>
+          
 
         </>
       }
@@ -486,8 +490,8 @@ function AddTest(props) {
       <>
 
         {quest?.length > 0 ? quest?.map((data) => (
-          <Card key={data._id} style={{ marginTop: "1%", marginBottom: "1%" }} className='p-2'>
-            <div></div>
+          <Card key={data._id} style={{ marginTop: "1%", marginBottom: "1%" }} className='p-2 w-75 mx-2'>
+            
             {role === "employee" && !loading && <div style={{ textAlign: "right" }}>
               <Button disabled={isActiveState} onClick={() => {
                 editHandleShow();
@@ -500,9 +504,9 @@ function AddTest(props) {
                 setansopt(data.ans)
               }} variant='primary' className=' ms-2'>Edit</Button>
               <Button disabled={isActiveState} className='ms-2 me-2' variant='danger' onClick={() => { handleRemove(data._id) }} >Remove</Button></div>}
-            <FormLabel ><h6 className='mt-2'>Q. {data["question"]}</h6></FormLabel>
-
-
+            
+              <FormLabel ><h5 className='mt-2 p-2'>Q. {data["question"]}</h5></FormLabel>
+              <div className='container p-3 '>
             <FormCheck type='radio' checked={data.ans ? data.ans === "opt1" : false} label={data.opt1} defaultValue={data.opt1} />
 
             <FormCheck type='radio' checked={data.ans ? data.ans === "opt2" : false} label={data.opt2} defaultValue={data.opt2} />
@@ -510,6 +514,8 @@ function AddTest(props) {
             <FormCheck type='radio' checked={data.ans ? data.ans === "opt3" : false} label={data.opt3} defaultValue={data.opt3} />
 
             <FormCheck type='radio' checked={data.ans ? data.ans === "opt4" : false} label={data.opt4} defaultValue={data.opt4} />
+            </div>
+            
 
           </Card>
 

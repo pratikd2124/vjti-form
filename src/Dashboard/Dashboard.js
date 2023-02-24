@@ -31,12 +31,13 @@ import Profile from './Profile.js';
 import Notification from './Notification.js';
 import Jobsearch from './Jobsearch.js';
 import Resumegenerate from './Resumegenerate.js';
-
+import Courses from './Courses.js'
 
 
 import { Link } from "react-router-dom";
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import ShowTest from '../Test/StudentApplyTest/ShowTest.js';
+import Careerview from './Careerpath/Careerview.js';
 
 const drawerWidth = 240;
 
@@ -236,6 +237,19 @@ export default function Dashboard() {
           </ListItem>
         </List>
         <Divider />
+        <List>
+        <ListItem  disablePadding onClick={()=>Setmenudata("Career path")}>
+                <ListItemButton
+                selected={selectedIndex === 6}
+                onClick={(event) => handleListItemClick(event, 6)}>
+              <ListItemIcon sx={{color:'white'}}>
+              <FindInPageIcon />
+              </ListItemIcon>
+              <ListItemText primary="Career path" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
     </Drawer>
     <Box
       component="main"
@@ -247,7 +261,8 @@ export default function Dashboard() {
         {menudata == "Job search and application" && <Jobsearch/>}
         {menudata == "Resume Generator" && <Resumegenerate />}
         {menudata == "Skill assessment" && <ShowTest/>}
-            
+        {menudata == "Search Courses" && <Courses />}
+        {menudata == "Career path" && <Careerview/>}
         
     </Box>
   </Box>

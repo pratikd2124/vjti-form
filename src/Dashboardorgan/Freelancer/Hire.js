@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-export const Hire = () => {
+const Hire = () => {
   return (
       <>
       <Form>
@@ -22,7 +23,7 @@ export const Hire = () => {
       
         <Form.Group className="mb-3" controlId="jobdec">
         <Form.Label>Skills Required</Form.Label>
-        <Form.Control type="text" placeholder="Salary Offered" />
+        <Form.Control type="text" placeholder="Skills Required" />
       </Form.Group>        
       <Button variant="primary" type="submit">
         Submit
@@ -31,3 +32,4 @@ export const Hire = () => {
     </>
   )
 }
+export default Hire;
