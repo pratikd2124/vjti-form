@@ -14,7 +14,6 @@ import Button from '@mui/material/Button';
 
 import GetFreelance from './GetFreelance.js';
 import Skillinput from '../../Employeeform/Skillinput.js';
-import { Spinner } from 'react-bootstrap';
 const Freelanceview = () => {
   const jsonData = [
     {
@@ -75,6 +74,7 @@ const Freelanceview = () => {
             "Content-Type": "application/json"
           }
         }).then(res => res.json().then(data => {
+          console.log(data)
           setdata([...datas, { ...data.data }])
         }))
       }
@@ -89,7 +89,7 @@ const Freelanceview = () => {
         <Grid container spacing={3} alignItems="center" justifyContent="center">
           <Grid item xs={12} sm={12} md={6}>
 
-            {datas ? datas.forEach((jsondata) => (
+            {datas && datas.map((jsondata) => (
               <Card className="shadow " sx={{ mb: 3, minWidth: 400, maxWidth: 500, maxheight: 300, p: 2, borderRadius: '20px', }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
                   <Avatar
@@ -124,9 +124,9 @@ const Freelanceview = () => {
 
                 </CardContent>
                 <CardActions>
-                  <Button variant="contained" onClick={() => { handleDelete(jsondata._id) }} size="small" sx={{ ml: 'auto', px: 4, }}>Delete</Button>
+                  <Button variant="contained" onClick={()=>{handleDelete(jsondata._id)}}  size="small" sx={{ ml: 'auto', px: 4, }}>Delete</Button>
                 </CardActions>
-              </Card>)):<Spinner style={{marginLeft:"50%"}} animation="border" variant="primary" />}
+              </Card>))}
             {/*  */}
             {/* <Card className="shadow " sx={{ mb:1, minWidth: 400,maxWidth:500, maxheight:300, p: 2, borderRadius: '20px', }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>
