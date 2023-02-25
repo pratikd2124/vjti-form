@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Chip from '@mui/material/Chip';
 
 const Login = () => {
   const [email, setEmail] = React.useState('')
@@ -37,7 +38,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container card mx-auto border-1 shadow" style={{ "width": "70%" }}>
+    <div className="container card mx-auto border-1 shadow-lg mt-3" style={{ "width": "70%",maxWidth:'700px',minHeight:'',backgroundColor:'#0c008c',color:'white', borderRadius:'10px' }}>
       <div className="text-center py-2">
         <h3>Login</h3>
       </div>

@@ -5,7 +5,7 @@ function ModalComponent({ size, modalHeader, modalJson ,show, handleaddquestion,
 
 
     return (
-        <Modal size={size} show={show} onHide={handleClose} >
+        <Modal size={size} show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
                 <Modal.Title>{modalHeader}</Modal.Title>
             </Modal.Header>

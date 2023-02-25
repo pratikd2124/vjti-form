@@ -11,6 +11,8 @@ import ConnectWithoutContactOutlinedIcon from '@mui/icons-material/ConnectWithou
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 import { Alert } from 'react-bootstrap';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+
 // import useStyles from '@material-ui/core/styles';
 
 const Section = () => {
@@ -149,40 +151,40 @@ const Section = () => {
     {
       id: 1,
       icon: <EngineeringOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
-      button : <Alert variant="contained">Track Students</Alert>,  
+      button : <Alert variant="contained">Get Hired</Alert>,  
       sentence:
-        'Solving world problems through various web applications using efficient programs and tools',
+        'Get a job based on your skills',
     },
     {
       id: 2,
       icon: <TextSnippetIcon sx={{ fontSize: 100 }} color="primary" />,
-      button : <Alert variant="contained">Students Notice</Alert>,
+      button : <Alert variant="contained">Quick Application</Alert>,
       sentence:
-        'Through team work, we collaborate and deliver quality projects of high standards',
+        'Apply directly through portal',
     },
     {
       id: 3,
       icon: < AddTaskIcon sx={{ fontSize: 100 }} color="primary" />,
       button : <Alert variant="contained">Test Section</Alert>,
-      sentence: 'Flexible payment plan is applicable to all our services',
+      sentence: 'Skill based test for better results',
       },
     {
       id: 4,
       icon: <DashboardIcon sx={{ fontSize: 100 }} color="primary" />,
       button : <Alert variant="contained">Dashboard</Alert>,
-      sentence: 'Flexible payment plan is applicable to all our services',
+      sentence: 'An overall lokout of task',
       },
       {
         id: 5,
-        icon: <CreateNewFolderOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
-        button : <Alert variant="contained">Classroom</Alert>,
-        sentence: 'Flexible payment plan is applicable to all our services',
+        icon: <AssignmentIndIcon sx={{ fontSize: 100 }} color="primary" />,
+        button : <Alert variant="contained">Career guidance</Alert>,
+        sentence: 'Ask career related queries',
       },
       {
         id: 6,
         icon: <ConnectWithoutContactOutlinedIcon sx={{ fontSize: 100 }} color="primary" />,
         button : <Alert variant="contained">Group Chat</Alert>,
-        sentence: 'Flexible payment plan is applicable to all our services',
+        sentence: 'Contanct to recruiters',
       },
   ];
   return (
@@ -198,9 +200,9 @@ const Section = () => {
         {sectionItems.map((item) => (
             <Grid
             item
-            xs={12}
-            md={2}
-            sx={{ boxShadow: 4 }}
+            xs={8}
+            md={4}
+            sx={{ boxShadow: 4,mx:2 }}
             minHeight={300}
             key={item.id}
             className={classes.setionGridItem}

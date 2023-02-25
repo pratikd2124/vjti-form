@@ -18,6 +18,7 @@ import DoTest from './Test/StudentApplyTest/DoTest.js';
 import ApplyTest from './Test/StudentApplyTest/ApplyTest.js';
 import Login from './userregform/Login.js';
 import Home from './Components/Landingpage/Home';
+import Companyform from './userregform/Companyform';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route exact path="/dotest" element={<DoTest />} />
           <Route exact path="/applytest" element={<ApplyTest />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/orgsignup" element={<Companyform />} />
 
 
 

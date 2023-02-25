@@ -125,7 +125,7 @@ const Navbarcomp = () => {
                   Register
                 </Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu} style={{ display: 'flex', flexDirection: 'column' }}>
+              {/* <MenuItem onClick={handleCloseNavMenu} style={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography component={Link} to="/classroom"
                   sx={{ my: 2, mx: 1, color: 'black', display: 'flex', textDecoration: 'none', }}>
                   Classroom
@@ -142,7 +142,7 @@ const Navbarcomp = () => {
                   sx={{ my: 2, mx: 1, color: 'black', display: 'flex', textDecoration: 'none', }}>
                   Video Calling
                 </Typography>
-              </MenuItem>
+              </MenuItem> */}
 
             </Menu>
           </Box>

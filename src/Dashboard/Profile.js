@@ -1,6 +1,69 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import Chip from '@mui/material/Chip';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const params = useLocation();
+  console.log(params?.state)
+  const navigate = useNavigate()
+
+  const handleSubmitEducation = () => {
+    fetch("http://localhost:5000/user/employee/education/addeducation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        educations: params.state.userInput,
+        userid: JSON.parse(localStorage.getItem('user-vjti'))._id
+      })
+    }).then(res => res.json().then((data) => {
+      console.log(data)
+      if (data.success) {
+        fetch("http://localhost:5000/user/employee/skills/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            skills: params.state.selectedSkills,
+            userid: JSON.parse(localStorage.getItem('user-vjti'))._id
+          })
+        }).then(res => res.json().then((data) => {
+          console.log(data)
+          if (data.success) {
+            alert("User details saved successfully")
+            navigate("/dashboard")
+          } else {
+            alert(data.error)
+          }
+        }))
+        
+      } else {
+        alert(data.error)
+      }
+    }))
+
+    }
+
+    const [skills,setskills] = useState([])
+    const url = "http://54.64.228.28:9000/user/employee/skills"
+    useEffect(() => {
+        fetch(url + "/get/" + JSON.parse(localStorage.getItem("user-vjti"))._id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((res) => {
+            res.json().then((res) => {
+                console.log(res.data.skills);
+                if (res.success) {
+                    setskills(res.data.skills)
+                }
+            })
+        })        
+    },[])
+    
   return (
       <div >
           <h2>Profile</h2>
@@ -17,11 +80,11 @@ const Profile = () => {
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"/>
                     <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <h4>{(JSON.parse(localStorage.getItem("user-vjti")).username)}</h4>
+                      <p class="text-secondary mb-1">{(JSON.parse(localStorage.getItem("user-vjti")).email)}</p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                      <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button>
+                      {/* <button class="btn btn-primary">Follow</button>
+                      <button class="btn btn-outline-primary">Message</button> */}
                     </div>
                   </div>
                 </div>
@@ -35,7 +98,7 @@ const Profile = () => {
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                    {(JSON.parse(localStorage.getItem("user-vjti")).username)}
                     </div>
                   </div>
                   <hr/>
@@ -44,28 +107,12 @@ const Profile = () => {
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                    {(JSON.parse(localStorage.getItem("user-vjti")).email)}
                     </div>
                   </div>
                   <hr/>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
-                    </div>
-                  </div>
-                  <hr/>
+                  
+                  
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
@@ -77,7 +124,7 @@ const Profile = () => {
                   <hr/>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                      <button class="btn btn-info " >Edit</button>
                     </div>
                   </div>
                 </div>
@@ -87,54 +134,62 @@ const Profile = () => {
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Skills</h6>
-                      <small>Web Design</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '80%'}} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                      <h6 class="d-flex align-items-center mb-3">Skills</h6>
+                      <p></p>
+                                          {/* <Chip label="Web Design" variant="outlined" /> */}
+                                          {skills ? skills.map((data) => (<>
+                                              <div className="container w-100">
+                                              <button className="btn btn-outline-primary mx-3" disabled>{data}</button>
+                                                <a class="btn btn-primary mx-3" target="__blank" href={`http://54.64.228.28/assesment/test/${JSON.parse(localStorage.getItem("user-vjti"))._id}/${data}`}>Take test</a>
+                                              </div>     
+                            <hr/>
+                                          </>)) : ""}
+                      
+                        {/* <div className="container w-100 d-flex p-2">
+                          <Chip label="NodeJs" variant="outlined" />
+                            <a class="btn btn-primary ml-3" target="__blank" href="http://54.64.228.28/assesment/test//nodejs">Take test</a>
+                                              
+                       </div>
+                      
+                      <hr/>          
+                        <div className="container p-2">
+                         <Chip label="React JS" variant="outlined" />   
+                         <a class="btn btn-primary " target="__blank" href="http://54.64.228.28/assesment/test/abcd/reactjs">Take test</a>           
                       </div>
-                      <small>Website Markup</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '72%'}} aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+
+                      <hr/>           
+                      
+                    <div className="container p-2">
+                      <Chip label="Python" variant="outlined" />
+                         <a class="btn btn-primary " target="__blank" href="http://54.64.228.28/assesment/test/abcd/python">Take test</a>           
+                                              
                       </div>
-                      <small>One Page</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '89%'}} aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                      <hr/>
+                      
+                        <div className="container p-2">
+                            <Chip label="Django" variant="outlined" />
+                         <a class="btn btn-primary " target="__blank" href="http://54.64.228.28/assesment/test/abcd/python">Take test</a>           
+                                              
                       </div>
-                      <small>Mobile Template</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '55%'}} aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Backend API</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '66%'}} aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+                      <hr/>             */}
+                      
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Experience</h6>
-                      <small>Web Design</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '80%'}} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Website Markup</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width:' 72%'}} aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>One Page</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '89%'}} aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Mobile Template</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '55%'}} aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Backend API</small>
-                      <div class="progress mb-3" style={{height: '5px'}}>
-                        <div class="progress-bar bg-primary" role="progressbar" style={{width: '66%'}} aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
+                      <h6 class="d-flex align-items-center mb-3">Experience</h6>
+                      <p>Project 1</p>
+                      <hr/> 
+                      <p>Project 2</p>
+                      <hr/> 
+                      <p>Project 3</p>
+                      <hr/> 
+                      <p>Project 4</p>
+                      <hr/> 
+                      <p>Project 5</p>
+                      <hr/> 
                     </div>
                   </div>
                 </div>

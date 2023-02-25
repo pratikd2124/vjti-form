@@ -73,14 +73,14 @@ const Empregform = () => {
 
       <div className="card shadow p-3 col-md-8 mx-auto mt-5">
 
-        <div className="form-group my-3">
+        {/* <div className="form-group my-3">
           <div className="">
-            {/* <UploadCv/> */}
+            <UploadCv/>
             <label>Upload your CV:</label>
             <input type="file" className="form-control" aria-label="file example" />
           </div>
         </div>
-        <hr />
+        <hr /> */}
 
         <h4 className="text-center">OR</h4>
 

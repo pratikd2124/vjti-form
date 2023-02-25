@@ -194,14 +194,14 @@ function ViewTest() {
         <Container >
 
             <h3 className='mt-2' style={{ textAlign: "center", cursor: "pointer" }}><u>Assessments</u></h3>
-            {role === "employee" && <div className='d-flex'><Button className="mt-2 me-2" onClick={() => { handleShow() }}>Add Question Set</Button></div>}
-            <ModalComponent size={"lg"} modalHeader={"Add New Test"} modalJson={jsonModal} show={show} handleaddquestion={handleaddTest} handleClose={handleClose} handleShow={handleShow} />
+            {role === "employee" && <div className='d-flex'><Button className="mt-2 me-2" onClick={() => { handleShow() }}>Add New Test</Button></div>}
+            <ModalComponent size={"lg"}  modalHeader={"Add New Test"} modalJson={jsonModal} show={show} handleaddquestion={handleaddTest} handleClose={handleClose} handleShow={handleShow} />
 
             {/* create list of question set with timestamp using react-bootstrap */}
             {question_sets.length > 0 ? question_sets?.map(question_set => {
                 return (
                     <>
-                    <div className="col-xl-12 col-lg-4 mb-4">
+                    <div className="col-xl-12 col-lg-4 mb-4 ">
                      <div className="card mt-2  text-primary-emphasis bg-info-subtle border-primary-subtle rounded-3  w-75 h-100 p-2">
                          <div className="card-body d-flex flex-column align-items-center">
                              <h4 class="card-title">Exam Title :<b>     {question_set.testname || "Test Name"}</b></h4>
