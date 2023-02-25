@@ -161,24 +161,16 @@ const Content = () => {
                       style={{opacity: '0.7',
                              paddingBottom: '30px',
                              }}>
-                      Track your academic status. See your progress in abetter way by
-                      visualization. Teachers can grade students, view their submission details.
-                      Reports can be updated. Personal interaction rooms for better understanding.
+                      Track your professional career status. See your progress in a better way by
+                      Skill analysis. .
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ width: '200px', fontSize: '16px',m:2, }}
-          >
-            Register as Employee
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ width: '200px', fontSize: '16px',m:2, }}
-          >
-            Register as Company
-          </Button>
+          <div className="container p-2 m-2">
+          <a href="signup" class="btn btn-primary btn-lg p-3 m-2" role="button" aria-pressed="true">Register as Employee</a>
+          
+          <a href="/orgsignup" class="btn btn-primary btn-lg p-3 m-2" role="button" aria-pressed="true">Register as Company</a>
+          </div>
+          
+
         </Grid>
             <Grid item xs={4} md={5}>
             <QueryStatsIcon sx={{ fontSize: "20vw",color:'blue',fontWeight: 700,

@@ -65,25 +65,27 @@ const Userform = () => {
 
   const navigate = useNavigate()
   return (
-    <div className="container card mx-auto border-1 shadow" style={{ "width": "70%" }}>
+    <>
+      <body style={{background:'rgba(245,245,245,0.8)'}}>
+      <div className="container card mx-auto border-1 shadow " style={{width:'70%', maxWidth:'700px',backgroundColor:'#0c008c',color:'white', borderRadius:'10px'}}>
       <div className="text-center py-2">
         <h3>Sign Up User</h3>
       </div>
       <form>
-        <div className="form-group col-md-5 mx-auto py-1 ">
+        <div className="form-group col-md-5 mx-auto py-1 p-2">
           <label for="name" className="h5">Name</label>
           <input type="text" onChange={handleChange} className="form-control" id="name" aria-describedby="" name="name" placeholder="Enter First name & last name" />
         </div>
-        <div className="form-group col-md-5 mx-auto  py-1 ">
+        <div className="form-group col-md-5 mx-auto  py-1 p-2">
           <label for="exampleInputEmail1" className="h5">Email address</label>
           <input type="email" onChange={handleChange} className="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" />
 
         </div>
-        <div className="form-group col-md-5 mx-auto  py-1 ">
+        <div className="form-group col-md-5 mx-auto  py-1 p-2">
           <label for="Password1" className="h5">Password</label>
           <input type="password" onChange={handleChange} className="form-control" id="pass" name="password" placeholder="Password" />
         </div>
-        <div className="form-group col-md-5 mx-auto  py-1">
+        <div className="form-group col-md-5 mx-auto  py-1 p-2">
           <label for="Password2" className="h5">Confirm Password</label>
           <input type="password" onChange={handleChange} className="form-control" id="cnfpass" name="cnfpassword" placeholder="Confirm Password" />
         </div>
@@ -92,10 +94,14 @@ const Userform = () => {
           <button type="submit" className="btn btn-primary w-50" onClick={(e) => { handleSubmit(e) }}>Submit</button>
         </div>
 
-        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
           className="fw-bold text-body"><u>Login here</u></a></p>
       </form>
     </div>
+      </body>
+    
+    </>
+    
   )
 }
 

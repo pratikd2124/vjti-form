@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Form, FormCheck, FormLabel, Row } from "react-bootstrap";
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import ModalComponent from '../ModalComponent';
+import './AddTest.css';
+
 function AddTest(props) {
   const role = JSON.parse(localStorage.getItem("user-vjti")).role
   const [loading, setisloading] = useState(true)
@@ -429,11 +431,11 @@ function AddTest(props) {
     }))
   }
 
-
-
+const navigate = useNavigate()
 
   return (
     <Container>
+      <Button onClick={()=>{role === "employee" ? navigate("/dashboard") : navigate("/organization")}}>Back</Button>
       <h3 className='mt-2' style={{ textAlign: "center", cursor: "pointer" }} onClick={role === "employee" && titlehandleShow}>{titlePaper} Test</h3>
 
       <hr/>
@@ -490,7 +492,8 @@ function AddTest(props) {
       <>
 
         {quest?.length > 0 ? quest?.map((data) => (
-          <Card key={data._id} style={{ marginTop: "1%", marginBottom: "1%" }} className='p-2 w-75 mx-2'>
+          <>
+          {/* <Card key={data._id} style={{ marginTop: "1%", marginBottom: "1%" }} className='p-2 w-75 mx-2'>
             
             {role === "employee" && !loading && <div style={{ textAlign: "right" }}>
               <Button disabled={isActiveState} onClick={() => {
@@ -517,8 +520,50 @@ function AddTest(props) {
             </div>
             
 
-          </Card>
-
+            </Card> */}
+            <div class="container-test mt-sm-5 my-1">
+    <div class="question ml-sm-5 pl-sm-5 pt-2">
+        <div class="py-2 h5"><b>Q. {data["question"]}</b></div>
+        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 p-2" id="options">
+                  <label class="options">{data.opt1}
+                <input type="radio" checked={data.ans ? data.ans === "opt1" : false} defaultValue={data.opt1} ClassName="radio" />
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">{data.opt2}
+                <input type="radio" checked={data.ans ? data.ans === "opt2" : false} defaultValue={data.opt2} ClassName="radio"/>
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">{data.opt3}
+                <input type="radio" checked={data.ans ? data.ans === "opt3" : false} defaultValue={data.opt3} ClassName="radio"/>
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">{data.opt4}
+                <input type="radio" checked={data.ans ? data.ans === "opt4" : false} defaultValue={data.opt4} ClassName="radio"/>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="d-flex align-items-center pt-3 p-2 w-100">
+        <div id="prev">
+            <button class="btn btn-primary m-2" disabled={isActiveState} onClick={() => {
+                editHandleShow();
+                setqueseditid(data._id);
+                setquestion(data["question"]);
+                setopt1(data.opt1);
+                setopt2(data.opt2);
+                setopt3(data.opt3);
+                setopt4(data.opt4);
+                setansopt(data.ans)
+              }}>Edit</button>
+        </div>
+        <div class="ml-auto mr-sm-5">
+            <button class="btn btn-danger m-2" disabled={isActiveState} onClick={() => { handleRemove(data._id) }}>Remove</button>
+        </div>
+    </div>
+</div>
+          </>
+          
+          
 
         )) : ""}
       </>
