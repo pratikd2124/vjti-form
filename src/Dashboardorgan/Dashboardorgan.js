@@ -31,7 +31,7 @@ import Profile from './Companyprofile/Profile';
 import Trackview from './Tracking/Trackview';
 // import Carrerview from './Carrerpath/Carrerview';
 
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Careerview from './Careerpath/Careerview';
 import Freelanceview from './Freelancer/Freelanceview';
 import TrackCards from './Tracking/TrackCards';
@@ -91,7 +91,7 @@ export default function Dashboardorgan(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const [menudata, Setmenudata] = useState("Profile");
+  const [menudata, Setmenudata] = useState("Post A Job");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,10 +100,10 @@ export default function Dashboardorgan(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    
+
   };
 
   const { window } = props;
@@ -117,53 +117,53 @@ export default function Dashboardorgan(props) {
 
   return (
     <>
-  <div > 
-      <Box sx={{ display: 'flex',}}>
-    <CssBaseline />
-    <AppBar
-       position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },bgcolor:"#6670de",
-        }}
-    >
-      <Toolbar sx={{ display: 'flex', justifyContent: "space-between" }}>
-            <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+      <div >
+        <Box sx={{ display: 'flex', }}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            sx={{
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              ml: { sm: `${drawerWidth}px` }, bgcolor: "#6670de",
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-          Dashboard
-          </Typography>
+            <Toolbar sx={{ display: 'flex', justifyContent: "space-between" }}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                Dashboard
+              </Typography>
               {/* <Accountmenu sx={{ml:'auto'}} />     */}
-      </Toolbar>
+            </Toolbar>
           </AppBar>
           <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
           >
             <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth,bgcolor:"#000e4f",color:'grey' }
-          }}
-        >
-      <Toolbar />
-      <Divider />
-      {/* <List>
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, bgcolor: "#000e4f", color: 'grey' }
+              }}
+            >
+              <Toolbar />
+              <Divider />
+              {/* <List>
         {['Job Recommendation', 'Profile', 'Skill assessment', 'Resume analysis', 'Job search and application'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -176,73 +176,73 @@ export default function Dashboardorgan(props) {
         ))}
       </List>
       <Divider /> */}
-      <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Post A Job")} >
-          <ListItemButton
-                selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <WorkHistoryIcon />
-              </ListItemIcon>
-              <ListItemText primary="Post A Job" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Post A Job")} >
+                  <ListItemButton
+                    selected={selectedIndex === 0}
+                    onClick={(event) => handleListItemClick(event, 0)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <WorkHistoryIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Post A Job" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
 
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Freelancer")}>
-                <ListItemButton
-                  selected={selectedIndex === 1}
-                  onClick={(event) => handleListItemClick(event, 1)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Freelancer" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        
-        
-      <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Track application")}>
-                <ListItemButton
-                selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Track application" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Assessment")}>
-                <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Assessment" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Freelancer")}>
+                  <ListItemButton
+                    selected={selectedIndex === 1}
+                    onClick={(event) => handleListItemClick(event, 1)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <AssessmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Freelancer" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+
+
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Track application")}>
+                  <ListItemButton
+                    selected={selectedIndex === 2}
+                    onClick={(event) => handleListItemClick(event, 2)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <FindInPageIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Track application" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Assessment")}>
+                  <ListItemButton
+                    selected={selectedIndex === 3}
+                    onClick={(event) => handleListItemClick(event, 3)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <FindInPageIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Assessment" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
             </Drawer>
             <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth,bgcolor:"#000e4f",color:'grey' }
-          }}
-          open
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, bgcolor: "#000e4f", color: 'grey' }
+              }}
+              open
             >
-      <Toolbar />
-      <Divider />
-      {/* <List>
+              <Toolbar />
+              <Divider />
+              {/* <List>
         {['Job Recommendation', 'Profile', 'Skill assessment', 'Resume analysis', 'Job search and application'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -255,79 +255,80 @@ export default function Dashboardorgan(props) {
         ))}
       </List>
       <Divider /> */}
-      <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Post A Job")} >
-          <ListItemButton
-                selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <WorkHistoryIcon />
-              </ListItemIcon>
-              <ListItemText primary="Post A Job" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Post A Job")} >
+                  <ListItemButton
+                    selected={selectedIndex === 0}
+                    onClick={(event) => handleListItemClick(event, 0)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <WorkHistoryIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Post A Job" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
 
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Freelancer")}>
-                <ListItemButton
-                  selected={selectedIndex === 1}
-                  onClick={(event) => handleListItemClick(event, 1)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Freelancer" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        
-        
-      <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Track application")}>
-                <ListItemButton
-                selected={selectedIndex === 2}
-                onClick={(event) => handleListItemClick(event, 2)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Track application" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Assessment")}>
-                <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Assessment" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-    </Drawer>
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Freelancer")}>
+                  <ListItemButton
+                    selected={selectedIndex === 1}
+                    onClick={(event) => handleListItemClick(event, 1)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <AssessmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Freelancer" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+
+
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Track application")}>
+                  <ListItemButton
+                    selected={selectedIndex === 2}
+                    onClick={(event) => handleListItemClick(event, 2)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <FindInPageIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Track application" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+              <List>
+                <ListItem disablePadding onClick={() => Setmenudata("Assessment")}>
+                  <ListItemButton
+                    selected={selectedIndex === 3}
+                    onClick={(event) => handleListItemClick(event, 3)}>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <FindInPageIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Assessment" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+            </Drawer>
           </Box>
-    
-    <Box
-      component="main"
-      sx={{ flexGrow: 1,width: { sm: `calc(100% - ${drawerWidth}px)` }, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
-    >
-      <Toolbar />
-         {menudata == "Post A Job" && <Jobsview />}
-        {menudata == "Company Details" && <Profile />}
-        {menudata == "Track application" && <Trackview/>}
-       
-       {menudata == "Freelancer" && <Freelanceview/>}
-        
-    </Box>
-  </Box>
-    </div>
+
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
+          >
+            <Toolbar />
+            {menudata === "Post A Job" && <Jobsview />}
+            {menudata === "Company Details" && <Profile />}
+            {menudata === "Track application" && <Trackview />}
+            {menudata === "Assessment" && <ViewTest />}
+
+            {menudata === "Freelancer" && <Freelanceview />}
+
+          </Box>
+        </Box>
+      </div>
     </>
-    
+
   );
 }

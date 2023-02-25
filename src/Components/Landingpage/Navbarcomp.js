@@ -50,12 +50,12 @@ const Navbarcomp = () => {
   const classes = useStyle()
   const navigate = useNavigate()
 
-  const role = JSON.parse(localStorage.getItem("role"))
-  const orgName = JSON.parse(localStorage.getItem("profile")) ? true : false
-  const name = JSON.parse(localStorage.getItem("profile"))?.name
+  const role = localStorage.getItem("role")
+  const user = JSON.parse(localStorage.getItem("user-vjti"))
+
 
   return (
-    <AppBar position="static" sx={{mt:0,}}>
+    <AppBar position="static" sx={{ mt: 0, }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <InsightsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -72,7 +72,7 @@ const Navbarcomp = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              
+
             }}
           >
             EMPROVE
@@ -119,12 +119,7 @@ const Navbarcomp = () => {
                   Login
                 </Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu} style={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography component={Link} to="/register"
-                  sx={{ my: 2, mx: 1, color: 'black', display: 'flex', textDecoration: 'none', }}>
-                  Register
-                </Typography>
-              </MenuItem>
+
               {/* <MenuItem onClick={handleCloseNavMenu} style={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography component={Link} to="/classroom"
                   sx={{ my: 2, mx: 1, color: 'black', display: 'flex', textDecoration: 'none', }}>
@@ -167,17 +162,17 @@ const Navbarcomp = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
-            {!orgName && <><Typography component={Link} to="/login" className={classes.Typography}
-              sx={{ my: 2, mx: 2, color: 'white', display: 'flex', textDecoration: 'none', }}>
+            {!role && <Typography component={Link} to="/login" className={classes.Typography}
+              sx={{ my: 2, mx: 2, color: 'white', display: 'flex', textDecoration: 'none' }}>
               Login
-            </Typography>
-              <Typography component={Link} to="/register" className={classes.Typography}
-                sx={{ my: 2, mx: 2, color: 'white', display: 'flex', textDecoration: 'none', }}>
-                Register
-              </Typography></>}
+            </Typography>}
+            {role && <Typography component={Link} to={role === "employee" ? "/dashboard" : "/organization"} className={classes.Typography}
+              sx={{ my: 2, mx: 2, color: 'white', display: 'flex', textDecoration: 'none', }}>
+              Dashboard
+            </Typography>}
 
 
-            {orgName && <>
+            {/* {orgName && <>
               <Typography component={Link} to="/classroom" className={classes.Typography}
                 sx={{ my: 2, mx: 1, color: 'white', display: 'flex', textDecoration: 'none', }}>
                 Classroom
@@ -195,7 +190,7 @@ const Navbarcomp = () => {
                 Notices
               </Typography>
               {JSON.parse(localStorage.getItem("role")) !== "Student" && JSON.parse(localStorage.getItem("role")) !== "Parent" && <Typography component="a" href="https://trackfinity.netlify.app/"
-                sx={{my: 2, mx: 1, color: 'white', display: 'flex', textDecoration: 'none',  }}>
+                sx={{ my: 2, mx: 1, color: 'white', display: 'flex', textDecoration: 'none', }}>
                 Video Calling
               </Typography>}
               {JSON.parse(localStorage.getItem("role")) === "Student" && <Typography component="a" href="http://webknights.pythonanywhere.com/profile" className={classes.Typography}
@@ -209,8 +204,8 @@ const Navbarcomp = () => {
               {JSON.parse(localStorage.getItem("role")) !== "Student" && JSON.parse(localStorage.getItem("role")) !== "Parent" && JSON.parse(localStorage.getItem("role")) !== "Developer" && <Typography component="a" href="http://webknights.pythonanywhere.com/classes"
                 sx={{ my: 2, mx: 1, color: 'black', display: 'flex', textDecoration: 'none', }}>
                 Classes
-              </Typography>}
-            </>}
+              </Typography>} */}
+            {/* </>} */}
 
 
             {/* {pages.map((page) => (
@@ -224,40 +219,14 @@ const Navbarcomp = () => {
             ))}*/}
           </Box>
 
-          {name && <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={name} src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography onClick={() => {
-                    if (setting === "Logout") {
-                      localStorage.removeItem("profile")
-                      localStorage.removeItem("role")
-                      navigate("/")
-                    }
-                  }} textAlign="center">{setting !== "Logout" ? setting : orgName ? setting : ""}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          {user && <Box sx={{ flexGrow: 0 }}>
+            <Typography component={Link} to={"/"} onClick={() => {
+              localStorage.removeItem("user-vjti");
+              localStorage.removeItem("role");
+            }} className={classes.Typography}
+              sx={{ my: 2, mx: 2, color: 'white', display: 'flex', textDecoration: 'none', }}>
+              Logout
+            </Typography>
           </Box>}
         </Toolbar>
       </Container>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { Spinner } from 'react-bootstrap';
 
 export default function Courses() {
     const [data, setData] = useState([]);
@@ -30,10 +31,9 @@ export default function Courses() {
     console.log(data);
     return (
         <div >
-            Yes
             
             <Grid container spacing={2}>
-            {
+            {data.length > 0 ?
                 data.map((item) => (
                     
                         <Grid item xs={12} md={4}>
@@ -59,7 +59,7 @@ export default function Courses() {
             </CardActions>
             </Card> 
                         </Grid>
-                ))
+                )):<Spinner style={{marginLeft:"50%"}} animation="border" variant="primary" />
                 }   
                     </Grid>
                 

@@ -403,13 +403,13 @@ export default function Dashboard(props) {
       sx={{ flexGrow: 1,width: { sm: `calc(100% - ${drawerWidth}px)` }, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
     >
       <Toolbar />
-        {menudata == "Profile" && <Profile />}
-        {menudata == "All Notifications" && <Notification />}
-        {menudata == "Job search and application" && <Jobsearch/>}
-        {menudata == "Resume Generator" && <Resumegenerate />}
-        {menudata == "Skill assessment" && <ShowTest/>}
-        {menudata == "Search Courses" && <Courses />}
-        {menudata == "Career path" && <Careerview/>}
+        {menudata === "Profile" && <Profile />}
+        {menudata === "All Notifications" && <Notification />}
+        {menudata === "Job search and application" && <Jobsearch/>}
+        {menudata === "Resume Generator" && <Resumegenerate />}
+        {menudata === "Skill assessment" && <ShowTest/>}
+        {menudata === "Search Courses" && <Courses />}
+        {menudata === "Career path" && <Careerview/>}
         
     </Box>
   </Box>
