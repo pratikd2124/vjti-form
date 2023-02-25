@@ -32,10 +32,10 @@ import Notification from './Notification.js';
 import Jobsearch from './Jobsearch.js';
 import Resumegenerate from './Resumegenerate.js';
 import Courses from './Courses.js'
-
+import ShowFreelance from './Freelance/ShowFreelance.js';
 
 import { Link } from "react-router-dom";
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ShowTest from '../Test/StudentApplyTest/ShowTest.js';
 import Careerview from './Careerpath/Careerview.js';
 
@@ -104,43 +104,43 @@ export default function Dashboard() {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    
+
   };
 
 
   return (
     <>
-  <div > 
-      <Box sx={{ display: 'flex',}}>
-    <CssBaseline />
-    <AppBar
-        position="fixed"
-      sx={{ bgcolor:"#6670de", width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-    >
-      <Toolbar sx={{display:'flex', justifyContent:"space-between"}}>
-          <Typography variant="h6" noWrap component="div">
-          Dashboard
-          </Typography>
-              <Accountmenu sx={{ml:'auto'}} />    
-      </Toolbar>
-    </AppBar>
-    <Drawer
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: drawerWidth,
-          boxSizing: 'border-box',
-          bgcolor:"#01063d",
-          color:"grey",
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <Toolbar />
-      <Divider />
-      {/* <List>
+      <div >
+        <Box sx={{ display: 'flex', }}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            sx={{ bgcolor: "#6670de", width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+          >
+            <Toolbar sx={{ display: 'flex', justifyContent: "space-between" }}>
+              <Typography variant="h6" noWrap component="div">
+                Dashboard
+              </Typography>
+              <Accountmenu sx={{ ml: 'auto' }} />
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                bgcolor: "#01063d",
+                color: "grey",
+              },
+            }}
+            variant="permanent"
+            anchor="left"
+          >
+            <Toolbar />
+            <Divider />
+            {/* <List>
         {['Job Recommendation', 'Profile', 'Skill assessment', 'Resume analysis', 'Job search and application'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -153,121 +153,135 @@ export default function Dashboard() {
         ))}
       </List>
       <Divider /> */}
-          <List>
-            
-        <ListItem  disablePadding onClick={()=>Setmenudata("Search Courses")} >
-          <ListItemButton
-                selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <WorkHistoryIcon />
-              </ListItemIcon>
-              <ListItemText primary="Search Courses" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
+            <List>
 
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Resume Generator")}>
+              <ListItem disablePadding onClick={() => Setmenudata("Search Courses")} >
+                <ListItemButton
+                  selected={selectedIndex === 0}
+                  onClick={(event) => handleListItemClick(event, 0)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <WorkHistoryIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Search Courses" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("Resume Generator")}>
                 <ListItemButton
                   selected={selectedIndex === 1}
                   onClick={(event) => handleListItemClick(event, 1)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Resume Generator" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Skill assessment")}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AssessmentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Resume Generator" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("Skill assessment")}>
                 <ListItemButton
                   selected={selectedIndex === 2}
                   onClick={(event) => handleListItemClick(event, 2)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Skill assessment" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-      <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Job search and application")}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AssignmentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Skill assessment" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("Job search and application")}>
                 <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Job search and application" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        {/* {['All Notifications', 'Drafts', ].map((text, index) => (
+                  selected={selectedIndex === 3}
+                  onClick={(event) => handleListItemClick(event, 3)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <FindInPageIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Job search and application" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              {/* {['All Notifications', 'Drafts', ].map((text, index) => (
           
         ))} */}
-              
-        <ListItem  disablePadding onClick={()=>Setmenudata("Profile")}>
+
+              <ListItem disablePadding onClick={() => Setmenudata("Profile")}>
                 <ListItemButton
-                selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("All Notifications")}>
+                  selected={selectedIndex === 4}
+                  onClick={(event) => handleListItemClick(event, 4)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Profile" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("All Notifications")}>
                 <ListItemButton
-                selected={selectedIndex === 5}
-                onClick={(event) => handleListItemClick(event, 5)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText primary="All Notifications" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-        <ListItem  disablePadding onClick={()=>Setmenudata("Career path")}>
+                  selected={selectedIndex === 5}
+                  onClick={(event) => handleListItemClick(event, 5)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <NotificationsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="All Notifications" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("Career path")}>
                 <ListItemButton
-                selected={selectedIndex === 6}
-                onClick={(event) => handleListItemClick(event, 6)}>
-              <ListItemIcon sx={{color:'white'}}>
-              <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Career path" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-    </Drawer>
-    <Box
-      component="main"
-      sx={{ flexGrow: 1, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
-    >
-      <Toolbar />
-        {menudata == "Profile" && <Profile />}
-        {menudata == "All Notifications" && <Notification />}
-        {menudata == "Job search and application" && <Jobsearch/>}
-        {menudata == "Resume Generator" && <Resumegenerate />}
-        {menudata == "Skill assessment" && <ShowTest/>}
-        {menudata == "Search Courses" && <Courses />}
-        {menudata == "Career path" && <Careerview/>}
-        
-    </Box>
-  </Box>
-    </div>
+                  selected={selectedIndex === 6}
+                  onClick={(event) => handleListItemClick(event, 6)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <FindInPageIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Career path" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem disablePadding onClick={() => Setmenudata("Freelance")}>
+                <ListItemButton
+                  selected={selectedIndex === 7}
+                  onClick={(event) => handleListItemClick(event, 7)}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <FindInPageIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Freelance" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Divider />
+          </Drawer>
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
+          >
+            <Toolbar />
+            {menudata == "Profile" && <Profile />}
+            {menudata == "All Notifications" && <Notification />}
+            {menudata == "Job search and application" && <Jobsearch />}
+            {menudata == "Resume Generator" && <Resumegenerate />}
+            {menudata == "Skill assessment" && <ShowTest />}
+            {menudata == "Search Courses" && <Courses />}
+            {menudata == "Career path" && <Careerview />}
+            {menudata == "Freelance" && <ShowFreelance />}
+
+          </Box>
+        </Box>
+      </div>
     </>
-    
+
   );
 }

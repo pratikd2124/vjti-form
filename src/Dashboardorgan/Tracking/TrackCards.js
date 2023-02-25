@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -13,143 +13,110 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Button, Modal } from 'react-bootstrap';
 
-function createData(name, calories, fat, carbs, protein, price) {
-    return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      history: [
-        {
-          date: '2020-01-05',
-          customerId: '11091700',
-          amount: 3,
-        },
-        {
-          date: '2020-01-02',
-          customerId: 'Anonymous',
-          amount: 1,
-        },
-      ],
-    };
-  }
-  function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
-  
-    return (
-      <React.Fragment>
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' }, }}>
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row">
-            {row.name}
-          </TableCell>
-          <TableCell align="right">{row.calories}</TableCell>
-          <TableCell align="right">{row.fat}</TableCell>
-          <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.protein}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  Applicant List
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Date</TableCell>
-                      <TableCell>Customer</TableCell>
-                      <TableCell align="right">Amount</TableCell>
-                      <TableCell align="right">Total price ($)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {row.history.map((historyRow) => (
-                      <TableRow key={historyRow.date}>
-                        <TableCell component="th" scope="row">
-                          {historyRow.date}
-                        </TableCell>
-                        <TableCell>{historyRow.customerId}</TableCell>
-                        <TableCell align="right">{historyRow.amount}</TableCell>
-                        <TableCell align="right">
-                          {Math.round(historyRow.amount * row.price * 100) / 100}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
-    );
-  }
-  
-  Row.propTypes = {
-    row: PropTypes.shape({
-      calories: PropTypes.number.isRequired,
-      carbs: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      history: PropTypes.arrayOf(
-        PropTypes.shape({
-          amount: PropTypes.number.isRequired,
-          customerId: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-    }).isRequired,
-  };
 
-  const rows = [
-    createData('Software Engg', 159, 6.0, 24, ),
-    createData('Django Developer', 237, 9.0, 37,),
-    createData('Mern Developer', 262, 16.0, 24,),
-    createData('UX Designer', 305, 3.7, 67, ),
-    createData('Marketing Head', 356, 16.0, 49,),
-];
-  
+
 const TrackCards = () => {
+  const [jobs, setjobs] = useState([])
+  const url = "http://localhost:5000/user/jobs"
+
+  useEffect(() => {
+    fetch(url + "/getjobsbyemail/" + JSON.parse(localStorage.getItem("user-vjti")).email, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      res.json().then(data => {
+
+        console.log(data)
+        setjobs(data.data)
+      })
+    })
+  }, [])
+
+  const [show, setShow] = useState(false);
+  const [subdata, setsubdata] = useState([])
+  // /getappliedcandidates/:jobid
+
+  const handleView = (id) => {
+    console.log(id)
+    fetch(url + "/getcandidates/" + id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      res.json().then(data => {
+          console.log(data)
+          setsubdata(data.data)
+          setShow(true)
+
+      })
+    })
+  }
+
+
   return (
-    <div>
-       <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Job Role</TableCell>
-            <TableCell align="right">Date posted</TableCell>
-            <TableCell align="right">Salary offered</TableCell>
-            <TableCell align="right">No.of Applicants</TableCell>
-            <TableCell />
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
+    <>
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Job Title</th>
+            <th>Job Location</th>
+            <th>Job Salary</th>
+            <th>Job Type</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          {jobs ? jobs.map((data, index) => (<tr>
+            <td>{index + 1}</td>
+            <td>{data.jobtitle}</td>
+            <td>{data.location}</td>
+            <td>{data.salary}</td>
+            <td>{data.jobType}</td>
+            <td><Button variant="primary" onClick={() =>{handleView(data._id)} }>
+              View
+            </Button></td>
+          </tr>)) : ""}
+
+        </tbody>
       </Table>
-    </TableContainer>
-    </div>
-    
+
+      <Modal show={show} style={{ marginTop: "5vh" }} size="lg" onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Candidate List</Modal.Title>
+        </Modal.Header>
+        <Modal.Body >
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subdata ? subdata.map((data, index) => (<tr>
+                <td>{index + 1}</td>
+                <td>{data.userid.username}</td>
+                <td>{data.userid.email}</td>
+                <td>{new Date(data.createdAt).toISOString()}</td>
+                <td>{data.status}</td>
+                
+              </tr>)) : ""}
+
+            </tbody>
+          </Table>
+        </Modal.Body>
+      </Modal>
+    </>
+
   )
 }
 

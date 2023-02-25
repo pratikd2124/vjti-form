@@ -11,6 +11,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import Button from '@mui/material/Button';
 import Skillinput from '../Employeeform/Skillinput';
+import Search from './Searchbar/Search';
+import { Alert } from '@mui/material';
 
 const Jobcard = () => {
   const jsonData = [
@@ -45,13 +47,13 @@ const Jobcard = () => {
 
   const [data, setdata] = useState([])
   useEffect(() => {
-    fetch("http://localhost:5000/user/jobs/getJobsByUserIdNotApplied/"+JSON.parse(localStorage.getItem("user-vjti"))._id, {
+    fetch("http://localhost:5000/user/jobs/getJobsByUserIdNotApplied/" + JSON.parse(localStorage.getItem("user-vjti"))._id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     }).then((res) => {
-      res.json().then(data => {
+      res.json().then((data) => {
         console.log(data)
         if (data.success) {
           setdata(data.data)
@@ -82,6 +84,21 @@ const Jobcard = () => {
       res.json().then(data => {
         console.log(data)
         if (data.success) {
+          fetch("http://localhost:5000/user/jobs/getJobsByUserIdNotApplied/" + JSON.parse(localStorage.getItem("user-vjti"))._id, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }).then((res) => {
+            res.json().then(data => {
+              console.log(data)
+              if (data.success) {
+                setdata(data.data)
+              } else {
+                alert(data.error)
+              }
+            })
+          })
           alert("Applied Successfully")
         } else {
           alert(data.error)
@@ -94,9 +111,32 @@ const Jobcard = () => {
   }
 
 
+  const [selectedSkills, setSelectedSkills] = useState([])
+
+  const handleSearch = () => {
+    console.log(selectedSkills)
+    fetch("http://localhost:5000/user/jobs/getjobsbyskill/" + selectedSkills + "/" + JSON.parse(localStorage.getItem("user-vjti"))._id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      res.json().then(data => {
+        console.log(data)
+        if (data.success) {
+          setdata(data.data)
+        } else {
+          alert(data.error)
+        }
+      })
+    }
+    )
+  }
+
 
   return (
     <>
+      <Search selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} handleSearch={handleSearch} />
       <Container maxWidth="lg" >
         <Grid container spacing={3} alignItems="center" justifyContent="center">
           <Grid item xs={12} sm={12} md={6}>
@@ -145,6 +185,7 @@ const Jobcard = () => {
                 </CardActions>
               </Card>
             ))}
+            {data.length === 0 && <Alert severity="error">No Jobs Found</Alert>}
             {/*  */}
             {/* <Card className="shadow " sx={{ mb:1, minWidth: 400,maxWidth:500, maxheight:300, p: 2, borderRadius: '20px', }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', pb: 1.5, gap: 1 }}>

@@ -34,6 +34,7 @@ import Trackview from './Tracking/Trackview';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 // import Careerview from './Careerpath/Careerview';
 import Freelanceview from './Freelancer/Freelanceview';
+import TrackCards from './Tracking/TrackCards';
 
 const drawerWidth = 240;
 
@@ -198,11 +199,11 @@ export default function Dashboardorgan() {
       sx={{ flexGrow: 1, bgcolor: 'rgba(245,245,255,0.5)', p: 3, }}
     >
       <Toolbar />
-         {menudata == "Post A Job" && <Jobsview />}
-        {menudata == "Company Details" && <Profile />}
-        {menudata == "Track application" && <Trackview/>}
+         {menudata === "Post A Job" && <Jobsview />}
+        {menudata ==="Company Details" && <Profile />}
+        {menudata === "Track application" && <TrackCards/>}
        
-       {menudata == "Freelancer" && <Freelanceview/>}
+       {menudata === "Freelancer" && <Freelanceview/>}
         
     </Box>
   </Box>

@@ -17,7 +17,7 @@ const Jobsearch = () => {
     
   return (
       <div className="container d-flex flex-column" >
-          <Search/>
+          
           <Jobcard />
           
     </div>
